@@ -11,36 +11,32 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var change = false
+    @State var circleProgress: CGFloat = 1.0
     
     var body: some View {
         VStack(spacing: 20) {
             TitleText(title: "Title")
             SubtitleText(subtitle: "SubTitleText")
             BannerText(text: "The button changes a variable that then changes a view's property. That property change cause a string on the screen", backColor: .orange, textColor: .primary)
+
             
-            Text("With Animation")
-            RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(change ? .orange : .blue)
-                .padding()
-                .animation(.easeInOut)
-            
-            Text("With NO Animation")
-            RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(change ? .orange : .blue)
-                .padding()
-            
-            
-            //            Circle()
-            //                .foregroundColor(.orange)
-            //            .frame(width: 100, height: 100)
-            //                .offset(x: 0, y: change ? 300 : 0)
-            //                .animation(Animation.linear)
-            //
-            //            Spacer()
-            //
             Button("Change") {
                 self.change.toggle()
-            }.padding()
+                self.circleProgress = self.change ? 0.25 : 1
+            }
+            
+            Spacer()
+            
+            Circle()
+            .trim(from: 0, to: circleProgress)
+                .stroke(Color.blue, style: StrokeStyle(lineWidth: 40, lineCap: CGLineCap.round))
+                .frame(height: 300)
+                .rotationEffect(.degrees(-90))
+            .padding(40)
+                .animation(.default)
+            
+            
+            
         }.font(.title)
     }
 }
