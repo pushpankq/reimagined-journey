@@ -18,14 +18,26 @@ struct ContentView: View {
             SubtitleText(subtitle: "SubTitleText")
             BannerText(text: "The button changes a variable that then changes a view's property. That property change cause a string on the screen", backColor: .orange, textColor: .primary)
             
-            Circle()
-                .foregroundColor(.orange)
-            .frame(width: 100, height: 100)
-                .offset(x: 0, y: change ? 300 : 0)
-                .animation(Animation.linear)
+            Text("With Animation")
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(change ? .orange : .blue)
+                .padding()
+                .animation(.easeInOut)
             
-            Spacer()
+            Text("With NO Animation")
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(change ? .orange : .blue)
+                .padding()
             
+            
+            //            Circle()
+            //                .foregroundColor(.orange)
+            //            .frame(width: 100, height: 100)
+            //                .offset(x: 0, y: change ? 300 : 0)
+            //                .animation(Animation.linear)
+            //
+            //            Spacer()
+            //
             Button("Change") {
                 self.change.toggle()
             }.padding()
@@ -59,9 +71,9 @@ struct BannerText: View {
         Text(text)
             .font(.title)
             .frame(maxWidth: .infinity)
-        .padding()
-        .background(backColor)
-        .foregroundColor(textColor)
+            .padding()
+            .background(backColor)
+            .foregroundColor(textColor)
     }
 }
 
